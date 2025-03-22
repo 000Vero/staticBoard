@@ -3,10 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Board - staticBoard</title>
+
     <link rel="stylesheet" href="/css/board.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.18/paper-full.min.js" integrity="sha512-qaPSGmKTwpu5ChwJ6AD3w7ecS3yM7pFC1cS3IfnjPM67dhXoymEomk1wqiZEHUFO4dQO1bhjo8LYImVDSDfR1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/board/canvas.js" type="module"></script>
 </head>
 <body>
-    <script type="module" src="/js/board.js"></script>
+    <div id="container">
+        <canvas id="board"></canvas>
+    </div>
+    <div id="tools">
+        <table class="table" id="toolsTable">
+            <tbody>
+                <tr>
+                    <td>
+                        <button id="pen">Pen</button>
+                    </td>
+                    <td>
+                        <button id="line">Line</button>
+                    </td>
+                    <td>
+                        <button id="rect">Rect</button>
+                    </td>
+                    <td>
+                        <button id="circle">Circle</button>
+                    </td>
+                    <td>|</td>
+                    <td>
+                        <button id="eraser">Eraser</button>
+                    </td>
+                    <td>|</td>
+                    <td>
+                        <button id="color">Color</button>
+                    </td>
+                    <td>
+                        <button id="thickness">Thickness</button>
+                    </td>
+                    <td>|</td>
+                    <td>
+                        <button id="share">Share</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="module" src="/js/board/board.js"></script>
 </body>
 </html>

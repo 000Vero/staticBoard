@@ -1,1 +1,35 @@
-@import "imports.css"
+@import "imports.css";
+
+:root {
+    --n-white: rgba(255, 255, 255, 0.815);
+}
+
+body, html {
+    height: 100%;
+}
+
+#board {
+    border-radius: 10px;
+    border-style: solid;
+    border-color: var(--n-white);
+    box-shadow: var(--n-white) 0px 0px 1vw;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#tools {
+    transform: translateY(-100%);
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--bulma-body-color) transparent;
+    scrollbar-width: thin;
+}
+
+#toolsTable {
+    margin: auto;
+}
