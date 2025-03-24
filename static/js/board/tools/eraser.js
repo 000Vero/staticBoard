@@ -1,3 +1,4 @@
+import { startSaveTimeout } from "../canvas.js";
 import { Path, Point } from "../paper.js"
 
 var eraserTool = new paper.Tool();
@@ -31,7 +32,6 @@ eraserTool.onMouseDrag = function(object) {
     }
 }
 
-eraserTool.onMouseUp = function() {
-}
+eraserTool.onMouseUp = startSaveTimeout;
 
 export var eraserTool;

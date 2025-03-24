@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - staticBoard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
-    <img id="avatar">
-    <span class="is-size-2" id="name"></span>
-    <ul id="boardList"></ul>
+    <figure class="image" id="avatarContainer">
+        <img class="is-rounded" id="avatar">
+    </figure>
+    <span class="is-size-2" id="name" style="display: none;"></span>
+    <div class="swiper">
+        <div class="swiper-wrapper" id="boardList"></div>
+    
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
     <script type="module" src="/js/home.js"></script>
 </body>
 </html>

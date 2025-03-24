@@ -1,3 +1,4 @@
+import { startSaveTimeout } from "../canvas.js";
 import { Path } from "../paper.js"
 
 var abs = Math.abs;
@@ -27,7 +28,7 @@ circleTool.onMouseDrag = function(object) {
 circleTool.onMouseUp = function() {
     this.path = null;
 
-    console.log(paper.project.activeLayer.exportJSON());
+    startSaveTimeout();
 }
 
 export var circleTool;

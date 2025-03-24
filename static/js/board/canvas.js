@@ -5,6 +5,10 @@ import { lineTool } from "./tools/line.js"
 import { rectangleTool } from "./tools/rect.js"
 import { circleTool } from "./tools/circle.js"
 import { eraserTool } from "./tools/eraser.js"
+import { pb, id } from "./board.js"
+
+var saveTimeout;
+const saveDelay = 5000;
 
 window.onload = async function() {
     var canvas = document.getElementById("board");
@@ -14,32 +18,29 @@ window.onload = async function() {
     var data = await getBoardData();
     document.title = data.name;
     try {
-        paper.project.activeLayer.importJSON(data.data);
+        paper.project.importJSON(data.data);
     } catch {
         // What to do if JSON import fails
         console.log("failed")
     }
 
+    if (data.author != pb.authStore.baseModel.id) {
+        document.getElementById("progressBar").style.display = "none";
+        document.getElementById("tools").style.display = "none";
+        penTool.remove();
+        document.getElementById("container").style.display = "flex";
+        return;
+    }
+
     paper.settings.hitTolerance = 20;
 
-    document.getElementById("pen").onclick = function() {
-        penTool.activate();
-        if (eraserTool.path != null) eraserTool.path.remove();
-    };
-    document.getElementById("line").onclick = function() {
-        lineTool.activate();
-        if (eraserTool.path != null) eraserTool.path.remove();
-    };
-    document.getElementById("rect").onclick = function() {
-        rectangleTool.activate();
-        if (eraserTool.path != null) eraserTool.path.remove();
-    };
-    document.getElementById("circle").onclick = function() {
-        circleTool.activate();
-        if (eraserTool.path != null) eraserTool.path.remove();
-    };
-    document.getElementById("eraser").onclick = function() { eraserTool.activate(); };
-    document.getElementById("share").onclick = function() {  };
+    penTool.activate();
+
+    setupElements();
+
+    document.getElementById("progressBar").style.display = "none";
+    document.getElementById("container").style.display = "flex";
+    document.getElementById("tools").style.visibility = "visible";
 }
 
 window.onresize = function() {
@@ -70,4 +71,49 @@ function dynamicResize(windowWidth, windowHeight) {
     paper.view.center = new Point(baseWidth / 2, baseHeight / 2);
 }
 
-eraserTool.activate();
+export function startSaveTimeout() {
+    if (saveTimeout != null) clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(save, saveDelay);
+}
+
+async function save() {
+    if (eraserTool.path != null) eraserTool.path.remove();
+    console.log("saving")
+    let exported = paper.project.exportJSON();
+    await pb.collection("boards").update(id, {
+        data: exported
+    });
+};
+
+function setupElements() {
+    document.getElementById("pen").onclick = function() {
+        penTool.activate();
+        if (eraserTool.path != null) eraserTool.path.remove();
+    };
+    document.getElementById("line").onclick = function() {
+        lineTool.activate();
+        if (eraserTool.path != null) eraserTool.path.remove();
+    };
+    document.getElementById("rect").onclick = function() {
+        rectangleTool.activate();
+        if (eraserTool.path != null) eraserTool.path.remove();
+    };
+    document.getElementById("circle").onclick = function() {
+        circleTool.activate();
+        if (eraserTool.path != null) eraserTool.path.remove();
+    };
+    document.getElementById("eraser").onclick = function() { eraserTool.activate(); };
+
+    document.getElementById("share").onclick = function() {  };
+
+    document.getElementById("save").onclick = save;
+
+    document.getElementById("previous").onclick = function() {
+        paper.project.activeLayer
+        console.log("previous")
+    };
+
+    document.getElementById("next").onclick = function() {
+        console.log("next")
+    };
+}

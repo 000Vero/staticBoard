@@ -1,4 +1,5 @@
 import { Path } from "../paper.js"
+import { startSaveTimeout } from "../canvas.js";
 
 var penTool = new paper.Tool();
 penTool.color = "#ffffff";
@@ -19,7 +20,7 @@ penTool.onMouseUp = function() {
 
     if (this.path._segments.length == 1) this.path.remove();
 
-    console.log(paper.project.activeLayer.exportJSON());
+    startSaveTimeout();
 }
 
 export var penTool;

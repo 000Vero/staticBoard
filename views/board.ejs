@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Board - staticBoard</title>
+    <title>Loading board... - staticBoard</title>
 
     <link rel="stylesheet" href="/css/board.css">
 
@@ -12,6 +12,8 @@
     <script src="/js/board/canvas.js" type="module"></script>
 </head>
 <body>
+    <button id="previous">Previous</button>
+    <button id="next">Next</button>
     <div id="container">
         <canvas id="board"></canvas>
     </div>
@@ -46,10 +48,14 @@
                     <td>
                         <button id="share">Share</button>
                     </td>
+                    <td>
+                        <button id="save">Manual Save</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <progress class="progress is-large is-primary" id="progressBar" max="100"></progress>
 
     <script type="module" src="/js/board/board.js"></script>
 </body>

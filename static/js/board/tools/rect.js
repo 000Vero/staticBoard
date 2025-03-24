@@ -1,3 +1,4 @@
+import { startSaveTimeout } from "../canvas.js";
 import { Path } from "../paper.js"
 
 var rectangleTool = new paper.Tool();
@@ -18,7 +19,7 @@ rectangleTool.onMouseDrag = function(object) {
 rectangleTool.onMouseUp = function() {
     this.path = null;
 
-    console.log(paper.project.activeLayer.exportJSON());
+    startSaveTimeout();
 }
 
 export var rectangleTool;
