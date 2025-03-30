@@ -5,19 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - staticBoard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/solid.min.css">
     <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
-    <figure class="image" id="avatarContainer">
-        <img class="is-rounded" id="avatar">
-    </figure>
+    <!-- Top -->
+    <div id="boxContainer">
+        <div class="box is-rounded">
+            <div class="control has-icons-right centerVertical">
+                <input class="input is-medium is-rounded" id="searchInput" type="text" placeholder="Search boards">
+                <span class="icon is-medium is-right">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+            </div>
+
+            <i class="fa-regular fa-square-plus fa-3x centerVertical" id="create"></i>
+
+            <div class="dropdown is-right">
+                <div class="dropdown-trigger">
+                    <figure class="image is-64x64" id="avatarContainer">
+                        <img class="is-rounded" id="avatar">
+                    </figure>
+                </div>
+                <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <a href="/logout">
+                                <button class="button is-danger is-outlined">
+                                    Logout
+                                    <i class="fa-solid fa-right-from-bracket" style="margin-left: 5px;"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <span class="is-size-2" id="name" style="display: none;"></span>
+
+    <!-- List -->
     <div class="swiper">
         <div class="swiper-wrapper" id="boardList"></div>
     
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" id="createModal">
+        <div class="modal-background"></div>
+        <div class="modal-body">
+            <input class="input is-medium is-rounded" id="newBoardName" type="text" placeholder="Board name">
+            <div class="buttons">
+                <button class="button is-success" id="createBoard">Create</button>
+                <button class="button is-danger" id="closeCreate">
+                    <span>Cancel</span>
+                    <span class="icon is-small">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="/js/home.js"></script>
 </body>
 </html>

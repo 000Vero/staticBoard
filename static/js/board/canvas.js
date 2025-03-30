@@ -9,6 +9,7 @@ import { pb, id } from "./board.js"
 
 var saveTimeout;
 const saveDelay = 5000;
+var currentLayer = 0;
 
 window.onload = async function() {
     var canvas = document.getElementById("board");
@@ -19,6 +20,7 @@ window.onload = async function() {
     document.title = data.name;
     try {
         paper.project.importJSON(data.data);
+        switchLayer(currentLayer);
     } catch {
         // What to do if JSON import fails
         console.log("failed")
@@ -26,6 +28,7 @@ window.onload = async function() {
 
     if (data.author != pb.authStore.baseModel.id) {
         document.getElementById("progressBar").style.display = "none";
+        document.getElementById("currentLayer").style.visibility = "visible";
         document.getElementById("tools").style.display = "none";
         penTool.remove();
         document.getElementById("container").style.display = "flex";
@@ -39,6 +42,7 @@ window.onload = async function() {
     setupElements();
 
     document.getElementById("progressBar").style.display = "none";
+    document.getElementById("currentLayer").style.visibility = "visible";
     document.getElementById("container").style.display = "flex";
     document.getElementById("tools").style.visibility = "visible";
 }
@@ -77,12 +81,32 @@ export function startSaveTimeout() {
 }
 
 async function save() {
-    if (eraserTool.path != null) eraserTool.path.remove();
-    console.log("saving")
+    if (eraserTool.path != null) {
+        eraserTool.path.remove();
+    }
+
     let exported = paper.project.exportJSON();
-    await pb.collection("boards").update(id, {
+    
+    let body = {
         data: exported
-    });
+    };
+
+    // Fix eraser is visible in preview
+
+    if (currentLayer == 0) {
+        const canvas = document.getElementById("board");
+        const imgData = await (await fetch(canvas.toDataURL("image/png"))).blob();
+        const imgFile = new File(
+            [imgData],
+            "preview.png",
+            {
+                type: "image/png"
+            }
+        );
+        body.preview = imgFile;
+    }
+
+    await pb.collection("boards").update(id, body);
 };
 
 function setupElements() {
@@ -109,11 +133,24 @@ function setupElements() {
     document.getElementById("save").onclick = save;
 
     document.getElementById("previous").onclick = function() {
-        paper.project.activeLayer
-        console.log("previous")
+        console.log(paper.project.layers)
+        if (currentLayer > 0) currentLayer--;
+        switchLayer(currentLayer);
     };
 
     document.getElementById("next").onclick = function() {
-        console.log("next")
+        if (currentLayer < 19) currentLayer++;
+        switchLayer(currentLayer);
     };
+}
+
+function switchLayer(index) {
+    paper.project.activeLayer.visible = false;
+    try {
+        paper.project.layers[index].activate();
+    } catch {
+        paper.project.layers[index] = new paper.Layer();
+    }
+    paper.project.activeLayer.visible = true;
+    document.getElementById("currentLayer").innerText = currentLayer + 1;
 }

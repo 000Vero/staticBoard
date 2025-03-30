@@ -7,13 +7,17 @@
     <title>Loading board... - staticBoard</title>
 
     <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/regular.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/solid.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.18/paper-full.min.js" integrity="sha512-qaPSGmKTwpu5ChwJ6AD3w7ecS3yM7pFC1cS3IfnjPM67dhXoymEomk1wqiZEHUFO4dQO1bhjo8LYImVDSDfR1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/board/canvas.js" type="module"></script>
 </head>
 <body>
-    <button id="previous">Previous</button>
-    <button id="next">Next</button>
+    <span id="currentLayer">
+        1
+    </span>
     <div id="container">
         <canvas id="board"></canvas>
     </div>
@@ -22,34 +26,64 @@
             <tbody>
                 <tr>
                     <td>
-                        <button id="pen">Pen</button>
+                        <button id="previous">
+                            <i class="fa-solid fa-angle-left fa-2x"></i>
+                        </button>
+                    </td>
+                    <td></td>
+                    <td>
+                        <button id="pen">
+                            <i class="fa-solid fa-pen fa-2x"></i>
+                        </button>
                     </td>
                     <td>
-                        <button id="line">Line</button>
+                        <button id="line">
+                            <i class="fa-solid fa-slash fa-2x"></i>
+                        </button>
                     </td>
                     <td>
-                        <button id="rect">Rect</button>
+                        <button id="rect">
+                            <i class="fa-regular fa-square fa-2x"></i>
+                        </button>
                     </td>
                     <td>
-                        <button id="circle">Circle</button>
+                        <button id="circle">
+                            <i class="fa-regular fa-circle fa-2x"></i>
+                        </button>
                     </td>
-                    <td>|</td>
+                    <td></td>
                     <td>
-                        <button id="eraser">Eraser</button>
+                        <button id="eraser">
+                            <i class="fa-solid fa-eraser fa-2x"></i>
+                        </button>
                     </td>
-                    <td>|</td>
+                    <td></td>
                     <td>
-                        <button id="color">Color</button>
-                    </td>
-                    <td>
-                        <button id="thickness">Thickness</button>
-                    </td>
-                    <td>|</td>
-                    <td>
-                        <button id="share">Share</button>
+                        <button id="color">
+                            <i class="fa-solid fa-droplet fa-2x"></i>
+                        </button>
                     </td>
                     <td>
-                        <button id="save">Manual Save</button>
+                        <button id="thickness">
+                            <i class="fa-solid fa-left-right fa-2x"></i>
+                        </button>
+                    </td>
+                    <td></td>
+                    <td>
+                        <button id="share">
+                            <i class="fa-solid fa-share-from-square fa-2x"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button id="save">
+                            <i class="fa-solid fa-floppy-disk fa-2x"></i>
+                        </button>
+                    </td>
+                    <td></td>
+                    <td>
+                        <button id="next">
+                            <i class="fa-solid fa-angle-right fa-2x"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>

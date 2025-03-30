@@ -24,9 +24,8 @@ if (provider.state !== params.get("state")) {
         params.get("code"),
         provider.codeVerifier,
         redirectURL,
-        // pass any optional user create data
         {
-            emailVisibility: true,
+            emailVisibility: false,
         }
 
     

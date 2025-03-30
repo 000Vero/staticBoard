@@ -26,20 +26,17 @@ document.getElementById("name").innerText = pb.authStore.baseModel.name;
 
 const fileToken = await pb.files.getToken();
 
-const boardList = document.getElementById("boardList");
-
-const boards = await pb.collection("boards").getFullList();
+const boards = await pb.collection("boards").getFullList({
+    sort: "-updated"
+});
 
 /* ===== BOARD LIST RENDERING ===== */
 
 const cardTemplate = `
-<div class="card swiper-slide">
+<div class="card swiper-slide is-shadowless">
     <div class="card-image">
         <figure class="image is-16by9">
-            <img
-                src="boardPreviewImage"
-                alt="Preview image"
-            />
+            <img src="boardPreviewImage" alt="Preview image"/>
         </figure>
     </div>
     <div class="card-content">
@@ -51,26 +48,52 @@ const cardTemplate = `
         </div>
 
         <div class="content">
-            <a href="boardURL">Open board</a>
-            <br>
             Last modified 
             <time>boardModified</time>
+
+            <br><br>
+
+            <a href="boardURL">
+                <button class="button is-link is-outlined" style="margin-right: 10px;">
+                    View board
+                    <i class="fa-solid fa-file" style="margin-left: 5px;"></i>
+                </button>
+            </a>
+            <button class="button is-danger is-outlined deleteBoard" id="boardId">
+                Delete board
+                <i class="fa-solid fa-trash-can" style="margin-left: 5px;"></i>
+            </button>
         </div>
     </div>
 </div>
 `;
 
+var boardSlides = [];
+
 for (let board of boards) {
-    let preview = pb.files.getURL(board, board.preview, {"token": fileToken});
+    let template = cardTemplate.replace("boardURL", "/board/" + board.id);
+
+    let preview;
+
+    if (board.preview != "") {
+        preview = pb.files.getURL(board, board.preview, {"token": fileToken});
+        template = template.replace("boardPreviewImage", preview);
+    } else {
+        template = template.replace('<img src="boardPreviewImage" alt="Preview image"/>', "");
+    }
+
     let author = await pb.collection("users").getOne(board.author);
 
-
-    let template = cardTemplate.replace("boardURL", "/board/" + board.id);
-    template = template.replace("boardPreviewImage", preview);
     template = template.replace("boardName", board.name);
     template = template.replace("boardAuthor", author.name);
     template = template.replace("boardModified", board.updated.split(" ")[0]);
-    boardList.innerHTML += template;
+    template = template.replace("boardId", board.id);
+    if (pb.authStore.baseModel.id != board.author) {
+        template = template.replace("<br><br>", "");
+        template = template.replace("<button", '<button style="display: none;"');
+    }
+    boardSlides = boardSlides.concat(template);
+    //boardList.innerHTML += template;
 }
 
 const swiper = new Swiper(".swiper", {
@@ -97,4 +120,64 @@ const swiper = new Swiper(".swiper", {
       el: ".swiper-scrollbar",
     },
 });
-  
+
+swiper.appendSlide(boardSlides);
+
+const slides = Object.assign([], document.getElementById("boardList").children);
+
+/* ===== EVENT HANDLING ===== */
+
+document.getElementById("create").onclick = function() {
+    let modal = document.getElementById("createModal");
+    modal.classList.add("is-active");
+}
+
+document.getElementById("closeCreate").onclick = function() {
+    let modal = document.getElementById("createModal");
+    modal.classList.remove("is-active");
+}
+
+document.getElementById("createBoard").onclick = async function() {
+    let name = document.getElementById("newBoardName").value;
+    if (name == null || name == "") return;
+    if (name.length > 64) name = name.substring(0, 64);
+
+    document.getElementById("createBoard").onclick = null;
+
+    let newBoard = await pb.collection("boards").create({
+        name: name,
+        author: pb.authStore.baseModel.id
+    });
+
+    window.location = "/board/" + newBoard.id;
+
+}
+
+document.getElementById("searchInput").onkeyup = function() {
+    const content = document.getElementById("searchInput").value;
+
+    swiper.removeAllSlides();
+
+    for (let board of slides) {
+        let name = board.children[1].children[0].children[0].children[0].innerText;
+
+        if (name.indexOf(content) > -1) {
+            swiper.appendSlide(board);
+        }
+    }
+}
+
+let deleteBoardButtons = document.getElementsByClassName("deleteBoard");
+
+for (let deleteBoard of deleteBoardButtons) deleteBoard.onclick = async function(event) {
+    let answer = confirm("Are you sure you want to delete this board?");
+    if (!answer) return;
+    await pb.collection("boards").delete(deleteBoard.id);
+    window.location.reload();
+}
+
+document.getElementById("avatar").onclick = function(event) {
+    let dropdown = event.target.parentNode.parentNode.parentNode;
+    if (dropdown.classList.contains("is-active")) dropdown.classList.remove("is-active");
+    else dropdown.classList.add("is-active");
+}

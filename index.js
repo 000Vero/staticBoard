@@ -19,6 +19,10 @@ app.get("/login", (req, res) => {
   res.render("login");
 })
 
+app.get("/logout", (req, res) => {
+  res.render("logout");
+});
+
 app.get("/oauth2-redirect", (req, res) => {
   res.render("oauth2-redirect");
 })
