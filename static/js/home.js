@@ -89,7 +89,7 @@ for (let board of boards) {
     template = template.replace("boardModified", board.updated.split(" ")[0]);
     template = template.replace("boardId", board.id);
     if (pb.authStore.baseModel.id != board.author) {
-        template = template.replace('<button class="button is-danger is-outlined deleteBoard" id="boardId">', '<button style="display: none;">');
+        template = template.replace('<button class="button is-danger is-outlined deleteBoard" id="' + board.id + '">', '<button style="display: none;">');
     }
     boardSlides = boardSlides.concat(template);
     //boardList.innerHTML += template;
