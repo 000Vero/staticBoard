@@ -62,3 +62,61 @@ td {
     border-width: 10px;
     border-color: "white";
 }
+
+#closeColor {
+    margin-top: 10px;
+}
+
+.color {
+    margin-left: 5px;
+}
+
+#defaultColors {
+    display: flex;
+    justify-content: center;
+}
+
+.slideContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.slider, .color, #thickness {
+    position: relative;
+}
+
+.slider {
+    appearance: none;
+    background: var(--bulma-scheme-main);
+    border-radius: var(--bulma-radius-rounded);
+    margin-left: 5px;
+}
+
+#thickness {
+    color: white;
+}
+
+#readersList {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--bulma-body-color) transparent;
+    scrollbar-width: thin;
+    max-height: 30vh;
+    max-width: fit-content;
+    position: relative;
+    margin-bottom: 10px;
+    margin: auto;
+}
+
+.modalBtn {
+    margin-top: 10px;
+}
+
+#connected {
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    transform: translate(-125%, 25%);
+    visibility: hidden;
+}

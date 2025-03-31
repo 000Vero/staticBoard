@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="/fontawesome/css/regular.min.css">
     <link rel="stylesheet" href="/fontawesome/css/solid.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.18/paper-full.min.js" integrity="sha512-qaPSGmKTwpu5ChwJ6AD3w7ecS3yM7pFC1cS3IfnjPM67dhXoymEomk1wqiZEHUFO4dQO1bhjo8LYImVDSDfR1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/board/canvas.js" type="module"></script>
 </head>
 <body>
+    <i class="fa-solid fa-wifi fa-2x" id="connected"></i>
     <span id="currentLayer">
         1
     </span>
@@ -63,11 +65,6 @@
                             <i class="fa-solid fa-droplet fa-2x"></i>
                         </button>
                     </td>
-                    <td>
-                        <button id="thickness">
-                            <i class="fa-solid fa-left-right fa-2x"></i>
-                        </button>
-                    </td>
                     <td></td>
                     <td>
                         <button id="share">
@@ -90,6 +87,67 @@
         </table>
     </div>
     <progress class="progress is-large is-primary" id="progressBar" max="100"></progress>
+
+    <!-- Color modal -->
+    <div class="modal" id="colorModal">
+        <div class="modal-background"></div>
+        <div class="modal-body">
+            <div id="picker"></div>
+            <br>
+            <div id="defaultColors">
+                <i class="fa-solid fa-circle fa-3x color" style="color: white;"></i>
+                <i class="fa-solid fa-circle fa-3x color" style="color: red;"></i>
+                <i class="fa-solid fa-circle fa-3x color" style="color: gold;"></i>
+                <i class="fa-solid fa-circle fa-3x color" style="color: green;"></i>
+                <i class="fa-solid fa-circle fa-3x color" style="color: rgb(34, 34, 255);"></i>
+            </div>
+            <br>
+            <div class="slideContainer">
+                <span id="thickness">Thickness: 4</span>
+                <input type="range" min="2" max="8" value="4" class="slider" id="thicknessRange">
+            </div>
+            <br>
+            <div class="buttons">
+                <button class="button is-danger" id="closeColor">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sharing modal -->
+    <div class="modal" id="sharingModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Share</p>
+                <button class="delete" id="closeSharing" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <span class="is-size-4" style="position: relative;">Shared with</span>
+                <div id="readersList">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="readersList">
+                            <tr>
+                                <td>No one</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <br>
+                    <div class="control has-icons-left">
+                        <input class="input" type="email" placeholder="Email" id="userSharingEmail">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                    <button class="button is-success modalBtn" id="shareBtn">Share</button>
+            </section>
+        </div>
+    </div>
 
     <script type="module" src="/js/board/board.js"></script>
 </body>

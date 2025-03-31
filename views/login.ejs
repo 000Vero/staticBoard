@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>staticBoard</title>
     <link rel="stylesheet" href="/css/login.css">
+
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
 </head>
 <body>
-    <ul id="list">
-        <li>Loading OAuth2 providers...</li>
-    </ul>
-
+    <div id="main">
+        <span id="appTitle">staticBoard</span>
+        <a id="oauth2">
+            <div style="margin: 5px;">
+                <span class="is-size-4">Login with Google</span>
+            </div>
+        </a>
+    </div>
     <script type="module" src="/js/login.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 import PocketBase from "https://cdn.jsdelivr.net/gh/pocketbase/js-sdk@master/dist/pocketbase.es.mjs"
 
 export const id = window.location.pathname.replace("/board/", "");
-export const pb = new PocketBase("http://127.0.0.1:8090");
+export const pb = new PocketBase("https://sbdb.psqsoft.org");
 
 pb.authStore.loadFromCookie(document.cookie);
 

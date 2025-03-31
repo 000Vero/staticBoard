@@ -3,7 +3,7 @@ import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
 
 /* ===== DATABASE HANDLING ===== */
 
-const pbURL = "http://127.0.0.1:8090";
+const pbURL = "https://sbdb.psqsoft.org";
 
 const pb = new PocketBase(pbURL);
 
@@ -89,8 +89,7 @@ for (let board of boards) {
     template = template.replace("boardModified", board.updated.split(" ")[0]);
     template = template.replace("boardId", board.id);
     if (pb.authStore.baseModel.id != board.author) {
-        template = template.replace("<br><br>", "");
-        template = template.replace("<button", '<button style="display: none;"');
+        template = template.replace('<button class="button is-danger is-outlined deleteBoard" id="boardId">', '<button style="display: none;"');
     }
     boardSlides = boardSlides.concat(template);
     //boardList.innerHTML += template;
