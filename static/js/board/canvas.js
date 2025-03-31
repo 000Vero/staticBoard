@@ -31,6 +31,17 @@ window.onload = async function() {
         console.log("failed")
     }
 
+    document.getElementById("previous").onclick = function() {
+        console.log(paper.project.layers)
+        if (currentLayer > 0) currentLayer--;
+        switchLayer(currentLayer);
+    };
+
+    document.getElementById("next").onclick = function() {
+        if (currentLayer < 19) currentLayer++;
+        switchLayer(currentLayer);
+    };
+
     if (data.author != pb.authStore.baseModel.id) {
         document.getElementById("progressBar").style.display = "none";
         document.getElementById("currentLayer").style.visibility = "visible";
@@ -181,17 +192,6 @@ function setupElements() {
     document.getElementById("shareBtn").onclick = shareBoardWithUser;
 
     document.getElementById("save").onclick = save;
-
-    document.getElementById("previous").onclick = function() {
-        console.log(paper.project.layers)
-        if (currentLayer > 0) currentLayer--;
-        switchLayer(currentLayer);
-    };
-
-    document.getElementById("next").onclick = function() {
-        if (currentLayer < 19) currentLayer++;
-        switchLayer(currentLayer);
-    };
 
     document.getElementById("connected").style.visibility = "visible";
 }
