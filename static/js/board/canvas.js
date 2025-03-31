@@ -34,7 +34,11 @@ window.onload = async function() {
     if (data.author != pb.authStore.baseModel.id) {
         document.getElementById("progressBar").style.display = "none";
         document.getElementById("currentLayer").style.visibility = "visible";
-        document.getElementById("tools").style.display = "none";
+        document.getElementById("tools").style.visibility = "visible";
+
+        let elems = document.getElementsByClassName("edit");
+        for (let el of elems) el.style.display = "none";
+
         penTool.remove();
         document.getElementById("container").style.display = "flex";
         return;
