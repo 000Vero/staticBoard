@@ -1,6 +1,6 @@
 import PocketBase from "https://cdn.jsdelivr.net/gh/pocketbase/js-sdk@master/dist/pocketbase.es.mjs"
 
-const pb = new PocketBase("http://127.0.0.1:8090");
+const pb = new PocketBase("https://sbdb.psqsoft.org");
 const redirectURL = "https://staticboard.psqsoft.org/oauth2-redirect";
 const contentEl = document.getElementById("content");
 
