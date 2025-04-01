@@ -120,3 +120,11 @@ td {
     transform: translate(-125%, 25%);
     visibility: hidden;
 }
+
+#home {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    transform: translate(25%, 25%);
+    cursor: pointer;
+}

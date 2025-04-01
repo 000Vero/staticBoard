@@ -32,6 +32,10 @@ window.onload = async function() {
         console.log("failed")
     }
 
+    document.getElementById("home").onclick = function() {
+        window.location = "/";
+    }
+
     document.getElementById("previous").onclick = function() {
         console.log(paper.project.layers)
         if (currentLayer > 0) currentLayer--;
@@ -49,7 +53,7 @@ window.onload = async function() {
         document.getElementById("tools").style.visibility = "visible";
 
         let elems = document.getElementsByClassName("edit");
-        for (let el of elems) el.style.display = "none";
+        for (let el of elems) el.parentNode.style.display = "none";
 
         penTool.remove();
         document.getElementById("container").style.display = "flex";

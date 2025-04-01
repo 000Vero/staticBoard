@@ -120,6 +120,8 @@ const swiper = new Swiper(".swiper", {
     },
 });
 
+document.getElementById("progressBar").style.display = "none";
+
 swiper.appendSlide(boardSlides);
 
 const slides = Object.assign([], document.getElementById("boardList").children);
