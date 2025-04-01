@@ -25,6 +25,7 @@ window.onload = async function() {
     document.title = data.name;
     try {
         paper.project.importJSON(data.data);
+        for (let lr of paper.project.layers) lr.visible = false;
         switchLayer(currentLayer);
     } catch {
         // What to do if JSON import fails
