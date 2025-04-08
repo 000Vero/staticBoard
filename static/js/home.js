@@ -11,20 +11,22 @@ pb.authStore.loadFromCookie(document.cookie);
 
 let avatarURL;
 
+let fileToken;
+
 try {
     avatarURL = pbURL +
                 "/api/files/users/" +
                 pb.authStore.baseModel.id +
                 "/" +
                 pb.authStore.baseModel.avatar;
+    
+    fileToken = await pb.files.getToken();
 } catch {
     window.location = "/login";
 }
 
 document.getElementById("avatar").src = avatarURL;
 document.getElementById("name").innerText = pb.authStore.baseModel.name;
-
-const fileToken = await pb.files.getToken();
 
 const boards = await pb.collection("boards").getFullList({
     sort: "-updated"
@@ -156,6 +158,13 @@ document.getElementById("createBoard").onclick = async function() {
 
 document.getElementById("searchInput").onkeyup = function() {
     const content = document.getElementById("searchInput").value;
+
+    if (content == "awesome") {
+        document.body.style.animationName = "rotateHue";
+        document.body.style.animationDuration = "1s";
+        document.body.style.animationIterationCount = "infinite";
+        document.body.style.animationTimingFunction = "linear";
+    }
 
     swiper.removeAllSlides();
 
