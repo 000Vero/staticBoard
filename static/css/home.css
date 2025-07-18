@@ -5,6 +5,10 @@ body, html {
     margin: 0;
 }
 
+body {
+    background: linear-gradient(180deg, #3a1376, #ff5724);
+}
+
 .swiper {
     top: calc(50% - 96px);
     transform: translateY(-50%);
@@ -24,6 +28,12 @@ body, html {
 .card {
     border-style: solid;
     border-color: hsla(var(--bulma-shadow-h),var(--bulma-shadow-s),var(--bulma-shadow-l),0.1);
+    background-color: transparent;
+    margin: 10px;
+}
+
+.card-content, .subtitle {
+    color: white;
 }
 
 .box {
@@ -62,6 +72,28 @@ progress {
 
 #create, #avatar {
     cursor: pointer;
+}
+
+.swiper-scrollbar {
+    max-width: 50%;
+    color: white;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    text-shadow: 0 0 0.4rem #C8C8C8;
+    color: white;
+}
+
+.box {
+    background-color: transparent;
+}
+
+#progressBar {
+	background-color: transparent;
+	background-image: linear-gradient(to right, rgb(124, 29, 248) 30%, transparent 30%);
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
 }
 
 @keyframes rotateHue {

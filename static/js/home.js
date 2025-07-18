@@ -37,14 +37,16 @@ const boards = await pb.collection("boards").getFullList({
 const cardTemplate = `
 <div class="card swiper-slide is-shadowless">
     <div class="card-image">
-        <figure class="image is-16by9">
-            <img src="boardPreviewImage" alt="Preview image"/>
-        </figure>
+        <a href="boardURL">
+            <figure class="image is-16by9">
+                <img src="boardPreviewImage" alt="Preview image"/>
+            </figure>
+        </a>
     </div>
     <div class="card-content">
         <div class="media">
             <div class="media-content">
-                <p class="title is-4">boardName</p>
+                <a href="boardURL"><p class="title is-4">boardName</p></a>
                 <p class="subtitle is-6">boardAuthor</p>
             </div>
         </div>
@@ -55,13 +57,7 @@ const cardTemplate = `
 
             <br><br>
 
-            <a href="boardURL">
-                <button class="button is-link is-outlined" style="margin-right: 10px;">
-                    View board
-                    <i class="fa-solid fa-file" style="margin-left: 5px;"></i>
-                </button>
-            </a>
-            <button class="button is-danger is-outlined deleteBoard" id="boardId">
+            <button class="button is-outlined is-light deleteBoard" id="boardId">
                 Delete board
                 <i class="fa-solid fa-trash-can" style="margin-left: 5px;"></i>
             </button>
@@ -73,7 +69,7 @@ const cardTemplate = `
 var boardSlides = [];
 
 for (let board of boards) {
-    let template = cardTemplate.replace("boardURL", "/board/" + board.id);
+    let template = cardTemplate.replaceAll("boardURL", "/board/" + board.id);
 
     let preview;
 
@@ -91,7 +87,7 @@ for (let board of boards) {
     template = template.replace("boardModified", board.updated.split(" ")[0]);
     template = template.replace("boardId", board.id);
     if (pb.authStore.baseModel.id != board.author) {
-        template = template.replace('<button class="button is-danger is-outlined deleteBoard" id="' + board.id + '">', '<button style="display: none;">');
+        template = template.replace('<button class="button is-outlined is-light deleteBoard" id="' + board.id + '">', '<button style="display: none;">');
     }
     boardSlides = boardSlides.concat(template);
     //boardList.innerHTML += template;
@@ -100,10 +96,13 @@ for (let board of boards) {
 const swiper = new Swiper(".swiper", {
     // Optional parameters
     direction: "horizontal",
-    effect: "coverflow",
     slidesPerView: 2,
-    centeredSlides: true,
-    loop: false,
+    loop: true,
+    freeMode: true,
+
+    keyboard: {
+        enabled: true
+    },
   
     // If we need pagination
     pagination: {

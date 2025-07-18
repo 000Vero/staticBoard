@@ -8,6 +8,14 @@ body, html {
     height: 100%;
 }
 
+body {
+    background: linear-gradient(180deg, #3a1376, #ff5724);
+}
+
+canvas {
+    background-color: var(--bulma-body-background-color);
+}
+
 #board {
     border-radius: 10px;
     border-style: solid;
@@ -50,6 +58,7 @@ progress {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 2;
     visibility: hidden;
     font-size: 5rem;
     opacity: 75%;
@@ -127,4 +136,8 @@ td {
     left: 0%;
     transform: translate(25%, 25%);
     cursor: pointer;
+}
+
+.table {
+    background-color: transparent;
 }
