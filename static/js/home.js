@@ -25,14 +25,67 @@ try {
     window.location = "/login";
 }
 
+// Look for redirect cookie
+let startIndex = document.cookie.indexOf("redirect=");
+if (startIndex >= 0) {
+    let cookie = "";
+    let i = 0;
+    while (true) {
+        let char = document.cookie[startIndex + 9 + i];
+
+        if (char != ';' && char != ' ' && char != undefined) {
+            cookie += char;
+        } else {
+            break;
+        }
+
+        i++;
+    }
+    if (cookie != "") {
+        document.cookie = "redirect=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location = "/board/" + cookie;
+    }
+}
+
 document.getElementById("avatar").src = avatarURL;
 document.getElementById("name").innerText = pb.authStore.baseModel.name;
 
-const boards = await pb.collection("boards").getFullList({
-    sort: "-updated"
+const itemsPerPage = 20;
+
+var boards = await pb.collection("boards").getList(1, itemsPerPage, {
+    sort: "-updated",
+    expand: "author"
 });
 
 /* ===== BOARD LIST RENDERING ===== */
+
+const swiper = new Swiper(".swiper", {
+    // Optional parameters
+    direction: "horizontal",
+    slidesPerView: 2,
+    loop: true,
+    freeMode: true,
+
+    keyboard: {
+        enabled: true
+    },
+  
+    // If we need pagination
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  
+    // Navigation arrows
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  
+    // And if we need scrollbar
+    scrollbar: {
+      el: ".swiper-scrollbar",
+    },
+});
 
 const cardTemplate = `
 <div class="card swiper-slide is-shadowless">
@@ -68,62 +121,44 @@ const cardTemplate = `
 
 var boardSlides = [];
 
-for (let board of boards) {
-    let template = cardTemplate.replaceAll("boardURL", "/board/" + board.id);
-
-    let preview;
-
-    if (board.preview != "") {
-        preview = pb.files.getURL(board, board.preview, {"token": fileToken});
-        template = template.replace("boardPreviewImage", preview);
-    } else {
-        template = template.replace('<img src="boardPreviewImage" alt="Preview image"/>', "");
+for (var i = 1; i <= boards.totalPages; i++) {
+    if (i > 1) {
+        boards = await pb.collection("boards").getList(i, itemsPerPage, {
+            sort: "-updated",
+            expand: "author"
+        });
     }
 
-    let author = await pb.collection("users").getOne(board.author);
+    boardSlides = [];
 
-    template = template.replace("boardName", board.name);
-    template = template.replace("boardAuthor", author.name);
-    template = template.replace("boardModified", board.updated.split(" ")[0]);
-    template = template.replace("boardId", board.id);
-    if (pb.authStore.baseModel.id != board.author) {
-        template = template.replace('<button class="button is-outlined is-light deleteBoard" id="' + board.id + '">', '<button style="display: none;">');
+    for (let board of boards.items) {
+
+        let template = cardTemplate.replaceAll("boardURL", "/board/" + board.id);
+
+        let preview;
+
+        if (board.preview != "") {
+            preview = pb.files.getURL(board, board.preview, {"token": fileToken});
+            template = template.replace("boardPreviewImage", preview);
+        } else {
+            template = template.replace('<img src="boardPreviewImage" alt="Preview image"/>', "");
+        }
+
+        template = template.replace("boardName", board.name);
+        template = template.replace("boardAuthor", board.expand.author.name);
+        template = template.replace("boardModified", board.updated.split(" ")[0]);
+        template = template.replace("boardId", board.id);
+        if (pb.authStore.baseModel.id != board.expand.author.id) {
+            template = template.replace('<button class="button is-outlined is-light deleteBoard" id="' + board.id + '">', '<button style="display: none;">');
+        }
+        boardSlides = boardSlides.concat(template);
+        //boardList.innerHTML += template;
     }
-    boardSlides = boardSlides.concat(template);
-    //boardList.innerHTML += template;
+
+    document.getElementById("progressBar").style.display = "none";
+
+    swiper.appendSlide(boardSlides);
 }
-
-const swiper = new Swiper(".swiper", {
-    // Optional parameters
-    direction: "horizontal",
-    slidesPerView: 2,
-    loop: true,
-    freeMode: true,
-
-    keyboard: {
-        enabled: true
-    },
-  
-    // If we need pagination
-    pagination: {
-      el: ".swiper-pagination",
-    },
-  
-    // Navigation arrows
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  
-    // And if we need scrollbar
-    scrollbar: {
-      el: ".swiper-scrollbar",
-    },
-});
-
-document.getElementById("progressBar").style.display = "none";
-
-swiper.appendSlide(boardSlides);
 
 const slides = Object.assign([], document.getElementById("boardList").children);
 

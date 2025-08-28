@@ -23,13 +23,21 @@ window.onload = async function() {
 
     data = await getBoardData();
     document.title = data.name;
+
+    var fileToken = await pb.files.getToken();
+    
+    var file = pb.files.getURL(data, data.file, {"token": fileToken});
+    var request = await fetch(file);
+
     try {
-        paper.project.importJSON(data.data);
+        var boardData = await request.json();
+
+        paper.project.importJSON(boardData);
         for (let lr of paper.project.layers) lr.visible = false;
         switchLayer(currentLayer);
     } catch {
         // What to do if JSON import fails
-        console.log("failed")
+        //console.log("failed")
     }
 
     document.getElementById("home").onclick = function() {
@@ -37,7 +45,7 @@ window.onload = async function() {
     }
 
     document.getElementById("previous").onclick = function() {
-        console.log(paper.project.layers)
+        //console.log(paper.project.layers)
         if (currentLayer > 0) currentLayer--;
         switchLayer(currentLayer);
     };
@@ -117,9 +125,19 @@ async function save() {
     }
 
     let exported = paper.project.exportJSON();
+    let blob = new Blob([exported], {type:"application/json"});
+        
+    let dataFile = new File(
+        [blob],
+        "data.json",
+        {
+            type: "application/json"
+        }
+    )
+    
     
     let body = {
-        data: exported
+        file: dataFile
     };
 
     // Fix eraser is visible in preview
@@ -141,7 +159,21 @@ async function save() {
 
     try {
         await pb.collection("boards").update(id, body);
-    } catch {
+    } catch (error) {
+        
+        if (error.status == 404) {
+
+            // Set cookie that redirects back to the board (expires in one day)
+            let d = new Date();
+            d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+
+            document.cookie = "redirect=" + id + ";" + expires + ";path=/";
+
+            alert("Logged out! You will be asked to log back in");
+            window.location = "/login";
+        }
+
         offline = true;
         indicator.remove("fa-wifi");
         indicator.add("fa-plane-up");
