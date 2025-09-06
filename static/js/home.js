@@ -65,6 +65,7 @@ const swiper = new Swiper(".swiper", {
     slidesPerView: 2,
     loop: true,
     freeMode: true,
+    centeredSlides: true,
 
     keyboard: {
         enabled: true
@@ -92,7 +93,7 @@ const cardTemplate = `
     <div class="card-image">
         <a href="boardURL">
             <figure class="image is-16by9">
-                <img src="boardPreviewImage" alt="Preview image"/>
+                <img class="boardThumbnail" src="boardPreviewImage" alt="Preview image"/>
             </figure>
         </a>
     </div>
@@ -191,7 +192,7 @@ document.getElementById("createBoard").onclick = async function() {
 }
 
 document.getElementById("searchInput").onkeyup = function() {
-    const content = document.getElementById("searchInput").value;
+    const content = document.getElementById("searchInput").value.toLowerCase();
 
     if (content == "awesome") {
         document.body.style.animationName = "rotateHue";
@@ -204,6 +205,7 @@ document.getElementById("searchInput").onkeyup = function() {
 
     for (let board of slides) {
         let name = board.children[1].children[0].children[0].children[0].innerText;
+        name = name.toLowerCase();
 
         if (name.indexOf(content) > -1) {
             swiper.appendSlide(board);

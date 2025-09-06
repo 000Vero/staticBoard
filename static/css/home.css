@@ -36,6 +36,10 @@ body {
     color: white;
 }
 
+.boardThumbnail {
+    background-color: var(--bulma-body-background-color);
+}
+
 .box {
     width: fit-content;
     height: 96px;
