@@ -141,3 +141,10 @@ td {
 .table {
     background-color: transparent;
 }
+
+.time-display {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+}
