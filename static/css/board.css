@@ -142,9 +142,11 @@ td {
     background-color: transparent;
 }
 
-.time-display {
+.time-widget {
+    font-size: 5vh;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 10px;
+    font-family: "Liquidrom";
+    color: white;
 }

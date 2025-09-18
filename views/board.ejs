@@ -14,12 +14,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.18/paper-full.min.js" integrity="sha512-qaPSGmKTwpu5ChwJ6AD3w7ecS3yM7pFC1cS3IfnjPM67dhXoymEomk1wqiZEHUFO4dQO1bhjo8LYImVDSDfR1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/board/canvas.js" type="module"></script>
-    <script src="https://time.now/static/js/widget-loader.js" async defer></script>
+    <script src="https://widget.time.is/t.js" type="text/javascript"></script>
 </head>
 <body>
     <i class="fa-solid fa-house fa-2x" id="home"></i>
     <i class="fa-solid fa-wifi fa-2x" id="connected"></i>
-    <a href="https://time.now/" class="time-now-widget" data-widget-type="digital" data-timezone="Europe/Rome" data-style="minimalist" data-width="213" data-title="" data-bgColor="#ffffff" data-textColor="#000000" data-show-seconds="true" data-show-date="false" data-format-12-hour="false"></a>
+    <a href="https://time.is/Milan" id="time_is_link" rel="nofollow" style="font-size:36px;display:none;">Time in Milan:</a>
+    <span id="Milan_z723" class="time-widget"></span>
     <span id="currentLayer">
         1
     </span>
@@ -153,5 +154,8 @@
     </div>
 
     <script type="module" src="/js/board/board.js"></script>
+    <script>
+        time_is_widget.init({Milan_z723:{}});
+    </script>
 </body>
 </html>
