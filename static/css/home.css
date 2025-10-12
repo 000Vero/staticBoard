@@ -5,10 +5,6 @@ body, html {
     margin: 0;
 }
 
-body {
-    background: linear-gradient(180deg, #3a1376, #ff5724);
-}
-
 .swiper {
     top: calc(50% - 96px);
     transform: translateY(-50%);

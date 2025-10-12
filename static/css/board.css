@@ -8,10 +8,6 @@ body, html {
     height: 100%;
 }
 
-body {
-    background: linear-gradient(180deg, #3a1376, #ff5724);
-}
-
 canvas {
     background-color: var(--bulma-body-background-color);
 }
