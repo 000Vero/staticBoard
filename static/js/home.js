@@ -62,8 +62,7 @@ var boards = await pb.collection("boards").getList(1, itemsPerPage, {
 const swiper = new Swiper(".swiper", {
     // Optional parameters
     direction: "horizontal",
-    slidesPerView: 2,
-    loop: true,
+    slidesPerView: 3,
     freeMode: true,
     centeredSlides: true,
 
