@@ -6,6 +6,7 @@ import { rectangleTool } from "./tools/rect.js"
 import { circleTool } from "./tools/circle.js"
 import { eraserTool } from "./tools/eraser.js"
 import { pb, id } from "./board.js"
+import { copyTool } from "./tools/copy.js"
 
 var saveTimeout;
 const saveDelay = 5000;
@@ -205,6 +206,11 @@ function setupElements() {
         circleTool.activate();
         if (eraserTool.path != null) eraserTool.path.remove();
     };
+    document.getElementById("copy").onclick = function() {
+        copyTool.activate();
+        if (eraserTool.path != null) eraserTool.path.remove();
+    };
+    
     document.getElementById("eraser").onclick = function() { eraserTool.activate(); };
 
     document.getElementById("color").onclick = function() {
