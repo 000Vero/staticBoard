@@ -149,7 +149,7 @@ for (var i = 1; i <= boards.totalPages; i++) {
         template = template.replace("boardModified", board.updated.split(" ")[0]);
         template = template.replace("boardId", board.id);
         if (pb.authStore.baseModel.id != board.expand.author.id) {
-            template = template.replace('<button class="button is-outlined is-light deleteBoard" id="' + board.id + '">', '<button style="display: none;">');
+            template = template.replace('<button class="button is-outlined is-danger deleteBoard" id="' + board.id + '">', '<button style="display: none;">');
         }
         boardSlides = boardSlides.concat(template);
         //boardList.innerHTML += template;
