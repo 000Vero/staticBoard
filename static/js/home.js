@@ -81,10 +81,10 @@ const swiper = new Swiper(".swiper", {
       prevEl: ".swiper-button-prev",
     },
   
-    // And if we need scrollbar
+    /*// And if we need scrollbar
     scrollbar: {
       el: ".swiper-scrollbar",
-    },
+    },*/
 });
 
 const cardTemplate = `
@@ -110,7 +110,7 @@ const cardTemplate = `
 
             <br><br>
 
-            <button class="button is-outlined is-light deleteBoard" id="boardId">
+            <button class="button is-outlined is-danger deleteBoard" id="boardId">
                 Delete board
                 <i class="fa-solid fa-trash-can" style="margin-left: 5px;"></i>
             </button>
@@ -225,4 +225,10 @@ document.getElementById("avatar").onclick = function(event) {
     let dropdown = event.target.parentNode.parentNode.parentNode;
     if (dropdown.classList.contains("is-active")) dropdown.classList.remove("is-active");
     else dropdown.classList.add("is-active");
+}
+
+document.getElementById("start-menu").onclick = function() {
+    let el = document.getElementById("menu");
+    if (el.style.display == "block") el.style.display = "none";
+    else el.style.display = "block";
 }

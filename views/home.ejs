@@ -39,18 +39,31 @@
         </div>
     </div>-->
     <!-- Top -->
-    <div id="boxContainer">
-        <div class="box is-rounded">
-            <div class="control has-icons-right centerVertical">
-                <input class="input is-medium is-rounded" id="searchInput" type="text" placeholder="Search boards">
-                <span class="icon is-medium is-right">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+    <div id="menu">
+        <div id="windows-start-menu-blue"><span style="margin-left: 2.5vh;">StaticBoard98</span></div>
+        <div id="menu-content">
+            <div class="menu-item">
+                <img src="https://win98icons.alexmeub.com/icons/png/directory_explorer-0.png" class="ico">
+                <input class="input" id="searchInput" type="text" placeholder="Search">
+            </div>
+            
+            <div class="menu-item" id="create">
+                <img class="ico" src="https://win98icons.alexmeub.com/icons/png/notepad_file-2.png">
+                <span style="color: black;">
+                    <span style="position: relative;top: 25%;">New</span>
                 </span>
             </div>
 
-            <i class="fa-regular fa-square-plus fa-3x centerVertical" id="create"></i>
-
-            <div class="dropdown is-right">
+            <div class="menu-item" id="logoff">
+                <a href="/logout" style="display: flex;">
+                    <img class="ico" src="https://win98icons.alexmeub.com/icons/png/shut_down_cool-5.png">
+                    <span style="color: black;">
+                        <span style="position: relative;top: 25%;">Logout</span>
+                    </span>
+                </a>
+            </div>
+        
+            <div class="dropdown is-right" style="display: none;">
                 <div class="dropdown-trigger">
                     <figure class="image is-64x64" id="avatarContainer">
                         <img class="is-rounded" id="avatar">
@@ -72,6 +85,12 @@
 
         </div>
     </div>
+    <div id="start-bar">
+        <button style="height: 100%; width: fit-content; box-shadow: 1px 2px rgb(0, 0, 0);" id="start-menu">
+            <img src="/favicon.ico" id="start-icon">
+            <span style="margin-right: 5px;">Start</span>
+        </button>
+    </div>
     <span class="is-size-2" id="name" style="display: none;"></span>
 
     <!-- List -->
@@ -80,27 +99,29 @@
     
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
-        <div class="swiper-scrollbar" style="left: 50%; transform: translateX(-50%);"></div>
+        <!--<div class="swiper-scrollbar" style="left: 50%; transform: translateX(-50%);"></div>-->
     </div>
 
     <!-- Modal -->
     <div class="modal" id="createModal">
-        <div class="modal-background"></div>
         <div class="modal-body">
+            <div class="window-bar">
+                <button class="button" id="closeCreate">
+                    X
+                </button>
+            </div>
             <input class="input is-medium is-rounded" id="newBoardName" type="text" placeholder="Board name">
             <div class="buttons">
-                <button class="button is-success" id="createBoard">Create</button>
-                <button class="button is-danger" id="closeCreate">
-                    <span>Cancel</span>
-                    <span class="icon is-small">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
+                <button class="button" id="createBoard">Create</button>
+                
             </div>
         </div>
     </div>
 
-    <progress class="progress is-large is-primary" id="progressBar" max="100"></progress>
+    <!--<progress class="progress is-large is-primary" id="progressBar" max="100"></progress>-->
+    <div id="progressBar">
+        <img src="https://win98icons.alexmeub.com/icons/png/application_hourglass-0.png" id="prg">
+    </div>
 
     <script type="module" src="/js/home.js"></script>
 </body>
