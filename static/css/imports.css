@@ -4,18 +4,8 @@
     src: url("/ttf/Liquidrom.ttf");
 }
 
-@font-face {
-    font-family: "MSW98";
-    src: url("/ttf/MSW98UI-Regular.ttf");
-}
-
-@font-face {
-    font-family: "MSW98-Bold";
-    src: url("/ttf/MSW98UI-Bold.ttf");
-}
-
 body {
-    background: black;
+    background: linear-gradient(180deg, #3a1376, #ff5724);
 }
 
 .test-badge {

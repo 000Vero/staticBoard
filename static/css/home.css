@@ -3,13 +3,6 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: "MSW98";
-}
-
-body {
-    background: url("https://wallpapercave.com/wp/wp2808032.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .swiper {
@@ -29,17 +22,14 @@ body {
 }
 
 .card {
-    border: 3px solid black;
-    border-radius: 0;
+    border-style: solid;
+    border-color: hsla(var(--bulma-shadow-h),var(--bulma-shadow-s),var(--bulma-shadow-l),0.1);
+    background-color: transparent;
     margin: 10px;
 }
 
-.card-content, .subtitle, .title {
-    color: black;
-}
-
-.title {
-    font-family: "MSW98-Bold";
+.card-content, .subtitle {
+    color: white;
 }
 
 .boardThumbnail {
@@ -98,52 +88,12 @@ progress {
     background-color: transparent;
 }
 
-/*#progressBar {
+#progressBar {
 	background-color: transparent;
 	background-image: linear-gradient(to right, rgb(124, 29, 248) 30%, transparent 30%);
     border-style: solid;
     border-width: 2px;
     border-color: white;
-}*/
-
-#progressBar {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-}
-
-#prg {
-    animation-name: progress;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    width: 5rem;
-    height: 5rem;
-    image-rendering: pixelated;
-    z-index: 3;
-}
-
-@keyframes progress {
-    0% {
-        opacity: 1;
-    }
-
-    30% {
-        opacity: 0.3;
-    }
-
-    60% {
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 0.3;
-    }
-
-    100% {
-        opacity: 1;
-    }
 }
 
 @keyframes rotateHue {
@@ -154,106 +104,4 @@ progress {
     to {
         filter: hue-rotate(360deg);
     }
-}
-
-#start-bar {
-    width: 100vw;
-    height: 3vh;
-    position: absolute;
-    bottom: 0%;
-    background-color: #959595;
-    border: 2px solid #b1b1b1;
-    color: black;
-    font-family: "MSW98-Bold";
-    z-index: 3;
-}
-
-#start-icon {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2vh;
-    height: 2vh;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-#menu {
-    position: absolute;
-    bottom: 0%;
-    height: 50vh;
-    width: 25vh;
-    z-index: 2;
-}
-
-#windows-start-menu-blue {
-    color: white;
-    font-weight: 900;
-    position: absolute;
-    transform: rotateZ(-90deg);
-    width: 200%;
-    font-size: 1.25rem;
-    font-family: "MSW98-Bold";
-    background: #011590;
-    transform-origin: top left;
-    top: 100%;
-    box-sizing: border-box;
-    padding: 0rem 0.75rem;
-}
-
-#menu-content {
-    padding-left: 2rem;
-    color: white;
-}
-
-#searchInput, #newBoardName {
-    background-color: white;
-    color: black;
-    font-family: "MSW98";
-    border-radius: 0px;
-    margin-right: 10px;
-}
-
-#newBoardName::placeholder, #searchInput::placeholder {
-    color: black;
-}
-
-.ico {
-    margin-right: 10px;
-    width: 45px;
-    height: 45px;
-}
-
-.menu-item {
-    display: flex; margin-top: 10px; margin-left: 5px;
-}
-
-.window-bar {
-    background: linear-gradient(90deg, #000b7c, #377cc6);
-    border: 2px solid #b1b1b1;
-}
-
-.modal-body, #closeCreate, #menu, #createBoard, .card {
-    background-color: #c0c0c0;
-	box-shadow: -2px -2px #e0dede, -2px 0 #e0dede, 0 -2px #e0dede, -4px -4px white, -4px 0 white, 0 -4px white, 2px 2px #818181, 0 2px #818181, 2px 0 #818181, 2px -2px #e0dede, -2px 2px #818181, -4px 2px white, -4px 4px black, 4px 4px black, 4px 0 black, 0 4px black, 2px -4px white, 4px -4px black;
-}
-
-#closeCreate {
-    position: relative;
-    left: 100%;
-    transform: translateX(-100%);
-    color: black;
-    border-radius: 0;
-    font-family: "MSW98-Bold";
-    border: 0px;
-    width: 1rem;
-    height: 2rem;
-}
-
-#createBoard {
-    color: black;
-    border-radius: 0;
-    font-family: "MSW98-Bold";
-    border: 0px;
-    margin: 5px;
 }
