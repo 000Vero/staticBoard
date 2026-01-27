@@ -52,7 +52,7 @@ window.onload = async function() {
     };
 
     document.getElementById("next").onclick = function() {
-        if (currentLayer < 19) currentLayer++;
+        if (currentLayer < 49) currentLayer++;
         switchLayer(currentLayer);
     };
 

@@ -57,7 +57,7 @@ progress {
     z-index: 2;
     visibility: hidden;
     font-size: 5rem;
-    opacity: 75%;
+    opacity: 50%;
     color: var(--bulma-grey-dark);
     pointer-events: none;
 }
