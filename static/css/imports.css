@@ -5,7 +5,8 @@
 }
 
 body {
-    background: linear-gradient(180deg, #3a1376, #ff5724);
+    /*background: linear-gradient(180deg, #3a1376, #ff5724);*/
+    background: rgb(34, 28, 28);
 }
 
 .test-badge {

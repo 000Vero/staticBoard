@@ -1,6 +1,13 @@
 import PocketBase from "https://cdn.jsdelivr.net/gh/pocketbase/js-sdk@master/dist/pocketbase.es.mjs"
 import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs"
 
+let date = new Date();
+
+// APRIL FOOLS
+if (date.getMonth() == 3 && date.getDate() == 1 && document.cookie.search("paid=ok") < 0) {
+    window.location = "/paywall";
+}
+
 /* ===== DATABASE HANDLING ===== */
 
 const pbURL = "https://sbdb.psqsoft.org";

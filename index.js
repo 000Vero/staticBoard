@@ -31,4 +31,10 @@ app.get("/board/:id", (req, res) => {
   res.render("board");
 })
 
+// APRIL FOOLS
+
+app.get("/paywall", (req, res) => {
+  res.render("paywall");
+})
+
 app.listen(port)
