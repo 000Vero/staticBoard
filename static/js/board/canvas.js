@@ -56,6 +56,12 @@ window.onload = async function() {
         switchLayer(currentLayer);
     };
 
+    document.getElementById("last").onclick = function() {
+        if (paper.project.layers.length == 0) return;
+        currentLayer = paper.project.layers.length - 1;
+        switchLayer(currentLayer);
+    };
+
     if (data.author != pb.authStore.baseModel.id) {
         document.getElementById("progressBar").style.display = "none";
         document.getElementById("currentLayer").style.visibility = "visible";
