@@ -26,8 +26,13 @@ try {
 } catch {
     window.location.href = "/login";
 }
-if (pb.authStore.baseModel.supporter == false) {
-    window.location.href = "/donate";
+
+try {
+    if (pb.authStore.baseModel.supporter == false) {
+        window.location.href = "/donate";
+    }
+} catch {
+    window.location.href = "/logout";
 }
 
 // Look for redirect cookie
