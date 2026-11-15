@@ -19,6 +19,14 @@ app.get("/login", (req, res) => {
   res.render("login");
 })
 
+app.get("/donate", (req, res) => {
+  res.render("donate");
+})
+
+app.get("/completed", (req, res) => {
+  res.render("completed");
+})
+
 app.get("/logout", (req, res) => {
   res.render("logout");
 });

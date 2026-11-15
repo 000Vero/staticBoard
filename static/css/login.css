@@ -33,3 +33,13 @@ body {
     box-shadow: 0 0 0.4rem #C8C8C8;
     font-family: "Liquidrom";
 }
+
+#donate {
+    margin-top: 5px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 0 0.4rem #C8C8C8;
+    font-family: "Liquidrom";
+}

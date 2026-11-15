@@ -3,11 +3,6 @@ import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
 
 let date = new Date();
 
-// APRIL FOOLS
-if (date.getMonth() == 3 && date.getDate() == 1 && document.cookie.search("paid=ok") < 0) {
-    window.location = "/paywall";
-}
-
 /* ===== DATABASE HANDLING ===== */
 
 const pbURL = "https://sbdb.psqsoft.org";
@@ -29,7 +24,10 @@ try {
     
     fileToken = await pb.files.getToken();
 } catch {
-    window.location = "/login";
+    window.location.href = "/login";
+}
+if (pb.authStore.baseModel.supporter == false) {
+    window.location.href = "/donate";
 }
 
 // Look for redirect cookie
@@ -63,7 +61,6 @@ var boards = await pb.collection("boards").getList(1, itemsPerPage, {
     sort: "-updated",
     expand: "author"
 });
-
 /* ===== BOARD LIST RENDERING ===== */
 
 const swiper = new Swiper(".swiper", {
